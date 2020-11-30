@@ -49,11 +49,6 @@ void MainWindow::on_actionOpen_triggered()
          return;
      }
 
-     int u =78;
-     int *p = &u;
-     int i = *p;
-
-
     file.close();
 
     Project project = ProjectJsonMapper::map(jsonDoc);
