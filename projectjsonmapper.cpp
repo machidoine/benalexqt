@@ -48,3 +48,25 @@ Developper ProjectJsonMapper::map(QJsonObject developperJson)
 
     return developper;
 }
+
+QString ProjectJsonMapper::toJson(Project* project)
+{
+    QJsonArray developpersArrays;
+
+    for(Developper developper : project->getDevelopers()) {
+        QJsonObject  developperObject;
+        developperObject.insert("nom", QJsonValue::fromVariant(developper.getNom()));
+        developperObject.insert("age", QJsonValue::fromVariant(developper.getAge()));
+        developpersArrays.push_back(developperObject);
+    }
+
+    QJsonObject projectObject;
+    projectObject.insert("nom", QJsonValue::fromVariant(project->getNom()));
+    projectObject.insert("developpers", developpersArrays);
+
+    QJsonDocument json;
+
+    json.setObject(projectObject);
+
+    return json.toJson();
+}

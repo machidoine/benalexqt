@@ -12,6 +12,10 @@
 #include <sstream>
 #include <iostream>
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -78,8 +82,21 @@ void MainWindow::populateDevelopperStringModel(Project project)
     developpersModel->setStringList(developpersStringList);
 }
 
-
 void MainWindow::on_toJsonButton_clicked()
 {
+    QStringListModel *developpersListViewModel = (QStringListModel*) ui->developperListView->model();
 
+    Project project;
+    project.setNom(ui->projectNameLabel->text());
+
+    for(QString developperString : developpersListViewModel->stringList()) {
+        Developper developper;
+
+        developper.setNom(developperString.split(" -> ")[0]);
+        developper.setAge(developperString.split(" -> ")[1].toInt());
+
+        project.addDevelopper(developper);
+    }
+
+    ui->jsonInputView->setText(project.toJson());
 }

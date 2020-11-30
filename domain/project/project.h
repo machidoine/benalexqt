@@ -19,6 +19,8 @@ public:
 
     void addDevelopper(Developper developper);
 
+    QString toJson();
+
 private:
     QString nom;
     std::list<Developper> developers;

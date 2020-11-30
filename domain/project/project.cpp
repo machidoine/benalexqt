@@ -1,4 +1,5 @@
 #include "project.h"
+#include "projectjsonmapper.h"
 
 Project::Project()
 {
@@ -28,4 +29,9 @@ void Project::setNom(const QString &value)
 void Project::addDevelopper(Developper developper)
 {
     this->developers.push_back(developper);
+}
+
+QString Project::toJson()
+{
+    return ProjectJsonMapper::toJson(this);
 }

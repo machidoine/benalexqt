@@ -11,6 +11,7 @@ public:
 
     static Project map(QJsonDocument projectJson);
     static Developper map(QJsonObject developperJson);
+    static QString toJson(Project* project);
 };
 
 #endif // PROJECTJSONMAPPER_H
