@@ -9,8 +9,9 @@
 #include <QJsonObject>
 #include <QStringListModel>
 #include <QDebug>
-
+#include <sstream>
 #include <iostream>
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -48,6 +49,10 @@ void MainWindow::on_actionOpen_triggered()
          return;
      }
 
+     int u =78;
+     int *p = &u;
+     int i = *p;
+
 
     file.close();
 
@@ -70,7 +75,9 @@ void MainWindow::populateDevelopperStringModel(Project project)
     QStringList developpersStringList;
 
     for(Developper developper : project.getDevelopers()) {
-        developpersStringList.append(developper.getNom() + " -> " + developper.getAge());
+        stringstream valueToDisplay;
+        valueToDisplay << developper.getNom().toStdString() <<  " -> " << developper.getAge();
+        developpersStringList.append(valueToDisplay.str().c_str());
     }
 
     developpersModel->setStringList(developpersStringList);
